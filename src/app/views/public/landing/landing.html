@@ -18,20 +18,66 @@
         </div>
       </div>
     </div>
-
-    <div ng-if="vm.localProducts.length" class="row dashboard-organization top-buffer-4">
-      <uib-tabset active="active">
-        <uib-tab index="0">
-          <div uib-tab-heading>{{ 'mno_enterprise.templates.dashboard.marketplace.index.applications' | translate }}</div>
-          <mno-app-listing is-public="true"></mno-app-listing>
-        </uib-tab>
-        <uib-tab index="1">
-          <div uib-tab-heading translate translate-value-appname="{{::app_name}}">
-            mno_enterprise.templates.dashboard.marketplace.index.reseller_products
+  <div ng-if="vm.localProducts.length" class="row dashboard-organization top-buffer-4">
+    <uib-tabset active="active">
+      <uib-tab index="0">
+        <div uib-tab-heading>{{ 'mno_enterprise.templates.dashboard.marketplace.index.applications' | translate }}</div>
+        <mno-app-listing is-public="true"></mno-app-listing>
+      </uib-tab>
+      <uib-tab index="1">
+        <div uib-tab-heading translate translate-value-appname="{{::app_name}}">
+          mno_enterprise.templates.dashboard.marketplace.index.reseller_products
+        </div>
+        <mno-local-product-listing is-public="true"></mno-local-product-listing>
+      </uib-tab>
+    </uib-tabset>
+      <!-------------------------------------->
+      <!--        Marketplace Content       -->
+      <!-------------------------------------->
+    <div class="row landing-dashboard-marketplace">
+      <div class="top-buffer-4" ng-show="!vm.isLoading">
+        <!-- Marketplace nav -->
+        <div class="row">
+          <div class="col-sm-6 col-md-6 col-lg-4 landing-page-search-wrapper">
+            <div class="row">
+              <input type="text" class="form-control landing-search-bar" placeholder="{{ 'mno_enterprise.templates.dashboard.marketplace.index.search' | translate }}" ng-model="vm.searchTerm" ng-change="vm.selectedCategory = ''"/>
+            </div>
+            <div class="row">
+              <div class="landing-marketplace-nav">
+                <div class="landing-page-app-categories">
+                  <div class="category-wrapper" ng-class="vm.displayAll.active" ng-click="vm.updateCategory(vm.displayAll)">
+                      {{ 'mno_enterprise.templates.dashboard.marketplace.index.select_all' | translate }}
+                  </div>
+                  <div class="category-wrapper" ng-class="c.active" ng-repeat="c in vm.categories" ng-click="vm.updateCategory(c)">
+                    {{c.label}}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <mno-local-product-listing is-public="true"></mno-local-product-listing>
-        </uib-tab>
-      </uib-tabset>
+          <!-- Marketplace list -->
+          <div class="col-sm-6 col-md-6 col-lg-8 landing-page-app-section-wrapper">
+            <div class="marketplace-list">
+              <!-- App Cards-->
+              <div class="col-sm-12 col-md-6 col-lg-4 landing-app-card-wrapper" ng-repeat="app in vm.apps | filter:vm.appsFilter | filter:vm.searchTerm">
+                <a class="landing-app-card" ui-sref="public.product({productId: app.nid})">
+                  <div class="media">
+                    <div class="landing-media-body">
+                      {{::app.tiny_description}}
+                    </div>
+                    <div class="media-object-wrapper">
+                      <img class="media-object" ng-src="{{::app.logo}}" ng-alt="{{::app.name}}">
+                    </div>
+                  </div>
+                </a>
+                <div class="landing-app-name-wrapper">
+                  <h4 class="media-heading landing-app-name">{{::app.name}}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <mno-app-listing ng-if="!vm.localProducts.length" is-public="true"></mno-app-listing>
   </div>
