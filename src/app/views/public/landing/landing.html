@@ -1,53 +1,51 @@
 <div id="public">
   <mno-loader ng-show="vm.isLoading" class="top-buffer-4"></mno-loader>
-
-  <div class="container" ng-show="!vm.isLoading">
-    <div class="row highlight-products" ng-if="vm.highlightedApps.length">
-      <div class="col-md-12 carousel-container">
-        <div class="well carousel">
-          <div uib-carousel active="0" interval="3000">
-            <div uib-slide ng-repeat="app in vm.highlightedApps" index="$index">
-              <a ui-sref="{{vm.highlightHref(app)}}">
-                <div class="carousel-image-container">
-                  <div ng-style="vm.carouselImageStyle(app)" class="carousel-image"></div>
-                  <div class="carousel-display-wrapper">
-                    <div class="carousel-logo-wrapper">
-                      <img class="carousel-logo" ng-src="{{::app.logo}}" ng-alt="{{::app.name}}">
-                    </div>
-                    <div class="carousel-app-info-wrapper hidden-xs">
-                      <div class="carousel-app-info-background">
-                        <div class="carousel-app-title">
-                          {{::app.name}}
-                        </div>
-                        <div class="carousel-app-description">
-                          {{::app.tiny_description}}
-                        </div>
-                        <div class="carousel-app-category" ng-repeat="category in app.categories | limitTo:5">
-                          <i class="fa fa-angle-right"></i>  {{category}}
+    <div class="container" ng-show="!vm.isLoading">
+      <div class="row highlight-products" ng-if="vm.highlightedApps.length">
+        <div class="col-md-12 carousel-container">
+          <div class="well carousel">
+            <div uib-carousel active="0" interval="3000">
+              <div uib-slide ng-repeat="app in vm.highlightedApps" index="$index">
+                <a ui-sref="{{vm.highlightHref(app)}}">
+                  <div class="carousel-image-container">
+                    <div ng-style="vm.carouselImageStyle(app)" class="carousel-image"></div>
+                    <div class="carousel-display-wrapper">
+                      <div class="carousel-logo-wrapper">
+                        <img class="carousel-logo" ng-src="{{::app.logo}}" ng-alt="{{::app.name}}">
+                      </div>
+                      <div class="carousel-app-info-wrapper hidden-xs">
+                        <div class="carousel-app-info-background">
+                          <div class="carousel-app-title">
+                            {{::app.name}}
+                          </div>
+                          <div class="carousel-app-description">
+                            {{::app.tiny_description}}
+                          </div>
+                          <div class="carousel-app-category" ng-repeat="category in app.categories | limitTo:5">
+                            <i class="fa fa-angle-right"></i>  {{category}}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </a>
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    <div ng-if="vm.localProducts.length" class="row dashboard-organization top-buffer-4">
+      <uib-tabset active="active">
+        <uib-tab index="0" ng-click="vm.toggleDisplayedProducts()">
+          <div uib-tab-heading>{{ 'mno_enterprise.templates.dashboard.marketplace.index.applications' | translate }}</div>
+        </uib-tab>
+        <uib-tab index="1" ng-click="vm.toggleDisplayedProducts()">
+          <div uib-tab-heading translate translate-value-appname="{{::app_name}}">
+            mno_enterprise.templates.dashboard.marketplace.index.reseller_products
+          </div>
+        </uib-tab>
+      </uib-tabset>
     </div>
-  <div ng-if="vm.localProducts.length" class="row dashboard-organization top-buffer-4">
-    <uib-tabset active="active">
-      <uib-tab index="0">
-        <div uib-tab-heading>{{ 'mno_enterprise.templates.dashboard.marketplace.index.applications' | translate }}</div>
-        <mno-app-listing is-public="true"></mno-app-listing>
-      </uib-tab>
-      <uib-tab index="1">
-        <div uib-tab-heading translate translate-value-appname="{{::app_name}}">
-          mno_enterprise.templates.dashboard.marketplace.index.reseller_products
-        </div>
-        <mno-local-product-listing is-public="true"></mno-local-product-listing>
-      </uib-tab>
-    </uib-tabset>
       <!-------------------------------------->
       <!--        Marketplace Content       -->
       <!-------------------------------------->
@@ -76,7 +74,7 @@
           <div class="col-sm-6 col-md-6 col-lg-8 landing-page-app-section-wrapper">
             <div class="marketplace-list">
               <!-- App Cards-->
-              <div class="col-sm-12 col-md-6 col-lg-4 landing-app-card-wrapper" ng-repeat="app in vm.apps | filter:vm.appsFilter | filter:vm.searchTerm">
+              <div class="col-sm-12 col-md-6 col-lg-4 landing-app-card-wrapper" ng-repeat="app in vm.displayedProducts | filter:vm.appsFilter | filter:vm.searchTerm">
                 <a class="landing-app-card" ui-sref="public.product({productId: app.nid})">
                   <div class="media">
                     <div class="landing-media-body">
@@ -96,6 +94,5 @@
         </div>
       </div>
     </div>
-    <mno-app-listing ng-if="!vm.localProducts.length" is-public="true"></mno-app-listing>
   </div>
 </div>

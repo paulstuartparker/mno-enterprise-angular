@@ -10,6 +10,12 @@ angular.module 'mnoEnterpriseAngular'
       vm.displayAll = {label: "", active: 'active'}
       vm.selectedCategory = vm.displayAll
 
+      vm.toggleDisplayedProducts = ->
+        if vm.displayedProducts == vm.localProducts
+          vm.displayedProducts = vm.products
+        else
+          vm.displayedProducts = vm.localProducts
+
       vm.appsFilter = (app) ->
         if (vm.searchTerm? && vm.searchTerm.length > 0) || !vm.selectedCategory.label
           return true
@@ -31,6 +37,7 @@ angular.module 'mnoEnterpriseAngular'
       MnoeMarketplace.getApps().then(
         (response) ->
           vm.products = _.filter(response.apps, (app) -> _.includes(MnoeConfig.publicApplications(), app.nid))
+          vm.displayedProducts = vm.products
           vm.highlightedApps = _.filter(response.apps, (app) -> _.includes(MnoeConfig.publicHighlightedApplications(), app.nid))
           if MnoeConfig.areLocalProductsEnabled
             vm.localProducts = _.filter(response.products, (product) -> product.local && _.includes(MnoeConfig.publicLocalProducts(), product.nid))
@@ -43,7 +50,7 @@ angular.module 'mnoEnterpriseAngular'
         if app.local
           "public.local_product({productId: app.nid})"
         else
-          "public.product({appId: app.nid})"
+          "public.product({productId: app.nid})"
 
       return
   )
