@@ -27,13 +27,13 @@
 
     <div ng-hide="vm.isLoading" class="table-cell" ng-show="!isLoading">
       <div class="row th-row hidden-sm hidden-xs">
-        <div class='cell' ng-class="{ 'col-md-3': !vm.cartSubscriptions, 'col-md-5': vm.cartSubscriptions }">
+        <div class='cell' ng-class="{ 'col-md-5': !vm.cartSubscriptions, 'col-md-7': vm.cartSubscriptions }">
           <div class="row">
-            <div class="cell col-md-6">{{ 'mno_enterprise.templates.dashboard.provisioning.subscriptions.product' | translate }}</div>
-            <div class="cell col-md-6">{{ 'mno_enterprise.templates.dashboard.provisioning.subscriptions.subscription' | translate }}</div>
+            <div class="cell col-md-8">{{ 'mno_enterprise.templates.dashboard.provisioning.subscriptions.product' | translate }}</div>
+            <div class="cell col-md-4">{{ 'mno_enterprise.templates.dashboard.provisioning.subscriptions.subscription' | translate }}</div>
           </div>
         </div>
-        <div class='cell' ng-class="{ 'col-md-2': !vm.cartSubscriptions, 'col-md-3': vm.cartSubscriptions }">
+        <div class='cell' ng-class="{ 'col-md-1': !vm.cartSubscriptions, 'col-md-2': vm.cartSubscriptions }">
           {{ 'mno_enterprise.templates.dashboard.provisioning.subscriptions.amount' | translate }}
         </div>
         <div class='cell' ng-class="{ 'col-md-1': !vm.cartSubscriptions, 'col-md-2': vm.cartSubscriptions }">
@@ -46,7 +46,7 @@
             <div class="cell col-md-4">{{ 'mno_enterprise.templates.dashboard.provisioning.subscriptions.status' | translate }}</div>
           </div>
         </div>
-        <div class="cell col-md-2">&nbsp;</div>
+        <!-- <div class="cell col-md-2">&nbsp;</div> -->
       </div>
 
       <div class="row td-row" ng-if="vm.subscriptions.length === 0">
@@ -56,16 +56,16 @@
       </div>
 
       <div class="row td-row" ng-repeat="subscription in vm.subscriptions">
-        <div class='cell' ng-class="{ 'col-md-3': !vm.cartSubscriptions, 'col-md-5': vm.cartSubscriptions }">
+        <div class='cell' ng-class="{ 'col-md-5': !vm.cartSubscriptions, 'col-md-7': vm.cartSubscriptions }">
           <div class="row">
-            <div class="cell col-md-6" ng-click="vm.goToSubscription(subscription)">
+            <div class="cell col-md-7" ng-click="vm.goToSubscription(subscription)">
               <span class="cell-label visible-xs-inline">
                 {{ 'mno_enterprise.templates.dashboard.provisioning.subscriptions.product' | translate }}:
               </span>
               <span title="{{ subscription.name }}" uib-tooltip="{{ subscription.product.name }}" tooltip-append-to-body="true">{{ subscription.product.name }}</span>
             </div>
 
-            <div class="cell col-md-6" ng-click="vm.goToSubscription(subscription)">
+            <div class="cell col-md-5" ng-click="vm.goToSubscription(subscription)">
               <span class="cell-label visible-xs-inline">
                 {{ 'mno_enterprise.templates.dashboard.provisioning.subscriptions.subscription' | translate }}:
               </span>
@@ -77,7 +77,7 @@
           </div>
         </div>
 
-        <div class='cell' ng-class="{ 'col-md-2': !vm.cartSubscriptions, 'col-md-3': vm.cartSubscriptions }" ng-click="vm.goToSubscription(subscription)">
+        <div class='cell' ng-class="{ 'col-md-1': !vm.cartSubscriptions, 'col-md-2': vm.cartSubscriptions }" ng-click="vm.goToSubscription(subscription)">
           <span class="cell-label visible-xs-inline">
             {{ 'mno_enterprise.templates.dashboard.provisioning.subscriptions.amount' | translate }}:
           </span>
@@ -112,7 +112,7 @@
           </div>
         </div>
 
-        <div class="cell col-md-4" ng-if="!vm.cartSubscriptions">
+        <div class="cell col-md-3" ng-if="!vm.cartSubscriptions">
           <div class="row">
             <div class="cell col-md-4" ng-click="vm.goToSubscription(subscription)">
               <span class="cell-label visible-xs-inline">
