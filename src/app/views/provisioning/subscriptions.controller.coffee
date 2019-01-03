@@ -79,5 +79,8 @@ angular.module 'mnoEnterpriseAngular'
     vm.pendingSubscription = (subscription) ->
       subscription.status in ['pending', 'provisioning']
 
+    vm.trimProductName = (name) ->
+      return name.substring(0, 37)
+
     return
   )
