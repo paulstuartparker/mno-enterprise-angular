@@ -27,7 +27,7 @@
 
     <div ng-hide="vm.isLoading" class="table-cell" ng-show="!isLoading">
       <div class="row th-row hidden-sm hidden-xs">
-        <div class='cell' ng-class="{ 'col-md-5': !vm.cartSubscriptions, 'col-md-7': vm.cartSubscriptions }">
+        <div class='cell' ng-class="{ 'col-md-4': !vm.cartSubscriptions, 'col-md-5': vm.cartSubscriptions }">
           <div class="row">
             <div class="cell col-md-8">{{ 'mno_enterprise.templates.dashboard.provisioning.subscriptions.product' | translate }}</div>
             <div class="cell col-md-4">{{ 'mno_enterprise.templates.dashboard.provisioning.subscriptions.subscription' | translate }}</div>
@@ -39,7 +39,7 @@
         <div class='cell' ng-class="{ 'col-md-1': !vm.cartSubscriptions, 'col-md-2': vm.cartSubscriptions }">
           {{ 'mno_enterprise.templates.dashboard.provisioning.subscriptions.licenses' | translate }}
         </div>
-        <div class='cell col-md-3' ng-if="!vm.cartSubscriptions">
+        <div class='cell col-md-4' ng-if="!vm.cartSubscriptions">
           <div class="row">
             <div class="cell col-md-4">{{ 'mno_enterprise.templates.dashboard.provisioning.subscriptions.start_date' | translate }}</div>
             <div class="cell col-md-4">{{ 'mno_enterprise.templates.dashboard.provisioning.subscriptions.end_date' | translate }}</div>
@@ -56,13 +56,13 @@
       </div>
 
       <div class="row td-row" ng-repeat="subscription in vm.subscriptions">
-        <div class='cell' ng-class="{ 'col-md-5': !vm.cartSubscriptions, 'col-md-7': vm.cartSubscriptions }">
+        <div class='cell' ng-class="{ 'col-md-4': !vm.cartSubscriptions, 'col-md-6': vm.cartSubscriptions }">
           <div class="row">
             <div class="cell col-md-8" ng-click="vm.goToSubscription(subscription)">
               <span class="cell-label visible-xs-inline">
                 {{ 'mno_enterprise.templates.dashboard.provisioning.subscriptions.product' | translate }}:
               </span>
-              <span title="{{ subscription.name }}" uib-tooltip="zazazazazazazazazzzazazazazazazazazazazazazazazazazazazazazazazazzazaza" tooltip-append-to-body="true">{{ vm.trimProductName(subscription.product.name) }}</span>
+              <span title="{{ subscription.name }}" uib-tooltip="{{subscription.product.name}}" tooltip-class="wide-tooltip" tooltip-append-to-body="true">{{ vm.trimProductName(subscription.product.name) }}</span>
             </div>
 
             <div class="cell col-md-4" ng-click="vm.goToSubscription(subscription)">
@@ -112,7 +112,7 @@
           </div>
         </div>
 
-        <div class="cell col-md-3" ng-if="!vm.cartSubscriptions">
+        <div class="cell col-md-4" ng-if="!vm.cartSubscriptions">
           <div class="row">
             <div class="cell col-md-4" ng-click="vm.goToSubscription(subscription)">
               <span class="cell-label visible-xs-inline">
@@ -138,7 +138,7 @@
           </div>
         </div>
 
-        <div class="cell col-md-1">
+        <div class="cell col-md-2">
           <div class="pull-left">
             <a ng-click="vm.editSubscription(subscription, 'reactivate')" ng-show="vm.showEditAction(subscription, 'reactivate') && !vm.cartSubscriptions" class="btn btn-link btn-link-primary" uib-tooltip="{{ 'mno_enterprise.templates.dashboard.provisioning.subscriptions.reactivate_tooltip' | translate }}" tooltip-append-to-body="true">
               <i class="fa fa-refresh"></i>
